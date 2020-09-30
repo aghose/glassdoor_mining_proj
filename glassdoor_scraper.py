@@ -2,7 +2,7 @@
 """
 Created on Tue Sep 29 06:47:48 2020
 
-This scraper was originally created by:
+A lot of this has been copied and pasted from
 @author: Ömer Sakarya, 
 github: https://github.com/arapfaik/scraping-glassdoor-selenium/blob/master/.ipynb_checkpoints/glassdoor%20scraping-checkpoint.ipynb
         

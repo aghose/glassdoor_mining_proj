@@ -6,7 +6,7 @@ Created on Tue Sep 29 08:37:31 2020
 """
 
 import glassdoor_scraper as gs
-import pandas as pd
+#import pandas as pd
 
 keyword = 'Data Scientist'
 
