@@ -12,9 +12,11 @@ keyword = 'Data Scientist'
 
 chromedriver_path = "C:/Users/asgho/github/glassdoor_mining_proj/chromedriver"
 sleep_time = 7
-num_jobs = 5
+num_jobs = 2000
 
 #This line will open a new chrome window and start the scraping.
 df = gs.get_jobs(keyword, num_jobs, False, chromedriver_path, sleep_time)
+
+df.to_csv('uncleaned_data.csv', index=False)
 
 df

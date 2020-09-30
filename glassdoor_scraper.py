@@ -62,10 +62,11 @@ def get_jobs(keyword, num_jobs, verbose, chromedriver_path, sleep_time):
 
             print("Progress: {}".format("" + str(len(jobs)) + "/" + str(num_jobs)))
             if len(jobs) >= num_jobs:
+                print("Complete!")
                 break
 
-            job_button.click()  #You might 
-            time.sleep(1)
+            job_button.click()  
+            time.sleep(2)
             collected_successfully = False
             
             while not collected_successfully:
@@ -79,7 +80,7 @@ def get_jobs(keyword, num_jobs, verbose, chromedriver_path, sleep_time):
                     time.sleep(5)
 
             try:
-                salary_estimate = driver.find_element_by_xpath('.//span[@class="gray salary"]').text
+                salary_estimate = driver.find_element_by_xpath('.//div[@class="salary"]').text
             except NoSuchElementException:
                 salary_estimate = -1 #You need to set a "not found value. It's important."
             
