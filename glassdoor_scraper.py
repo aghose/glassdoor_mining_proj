@@ -69,6 +69,8 @@ def get_jobs(keyword, num_jobs, verbose, sleep_time):
             time.sleep(2)
             collected_successfully = False
             
+            attmps = 0
+            
             while not collected_successfully:
                 try:
                     company_name = driver.find_element_by_xpath('.//div[@class="employerName"]').text
@@ -77,9 +79,24 @@ def get_jobs(keyword, num_jobs, verbose, sleep_time):
                     job_description = driver.find_element_by_xpath('.//div[@class="jobDescriptionContent desc"]').text
                     collected_successfully = True
                 except NoSuchElementException:
-                    job_description = -1
-                except:
-                    time.sleep(5)
+                    if attmps < 4:
+                        print("Number of attempts: " + str(attmps))
+                        time.sleep(5)
+                    else:
+                        job_description = -1
+                        print("Unable to find data")
+                        collected_successfully= True
+                except Exception as e:
+                    print(e)
+                    if attmps < 4:
+                        print("Number of attempts: " + str(attmps))
+                        time.sleep(5)
+                    else:
+                        print("Unable to find data")
+                        job_description = -1
+                        collected_successfully=True
+                finally:
+                    attmps+=1
 
             try:
                 salary_estimate = driver.find_element_by_xpath('.//div[@class="salary"]').text
