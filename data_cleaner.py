@@ -6,7 +6,7 @@ Created on Wed Sep 30 16:27:22 2020
 """
 
 import pandas as pd
-import numpy as np
+#import numpy as np
 
 #data = pd.read_csv('uncleaned_data.csv')
 
@@ -105,8 +105,3 @@ def clean_data(data_file_path, current_year):
     final_df = df
     df_missing_salary.to_csv('missing_salary.csv', index = False)
     return final_df
-
-
-df = clean_data('uncleaned_data.csv', 2020)
-
-df.to_csv('cleaned_data', index=False)
