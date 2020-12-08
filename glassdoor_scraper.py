@@ -76,6 +76,8 @@ def get_jobs(keyword, num_jobs, verbose, sleep_time):
                     job_title = driver.find_element_by_xpath('.//div[contains(@class, "title")]').text
                     job_description = driver.find_element_by_xpath('.//div[@class="jobDescriptionContent desc"]').text
                     collected_successfully = True
+                except NoSuchElementException:
+                    job_description = -1
                 except:
                     time.sleep(5)
 
