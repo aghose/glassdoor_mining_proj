@@ -16,10 +16,11 @@ keyword = 'Data Scientist'
 sleep_time = 7
 
 #Number of job listing you want it to pull/scrape
-num_jobs = 5
+num_jobs = 5000
 
 #This line will open a new chrome window and start the scraping.
+#You might need to install webdriver-manager 
 df = gs.get_jobs(keyword, num_jobs, False, sleep_time)
 
 #This will store the scraped data to a csv file
-#df.to_csv('uncleaned_data.csv', index=False)
+df.to_csv('uncleaned_data_5000.csv', index=False)
