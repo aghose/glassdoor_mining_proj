@@ -3,3 +3,20 @@
 [1207/131623.006:ERROR:directory_reader_win.cc(43)] FindFirstFile: The system cannot find the path specified. (0x3)
 [1207/144552.428:ERROR:directory_reader_win.cc(43)] FindFirstFile: The system cannot find the path specified. (0x3)
 [1207/181745.707:ERROR:directory_reader_win.cc(43)] FindFirstFile: The system cannot find the path specified. (0x3)
+[1207/201847.770:ERROR:directory_reader_win.cc(43)] FindFirstFile: The system cannot find the path specified. (0x3)
+[1207/222418.900:ERROR:process_reader_win.cc(151)] SuspendThread: Access is denied. (0x5)
+[1207/222418.901:ERROR:exception_snapshot_win.cc(99)] thread ID 7736 not found in process
+[1207/222418.901:ERROR:scoped_process_suspend.cc(40)] NtResumeProcess: An attempt was made to access an exiting process. (0xc000010a)
+[1207/222426.819:ERROR:process_info.cc(329)] VirtualQueryEx: Access is denied. (0x5)
+[1207/222426.819:ERROR:process_info.cc(556)] ReadMemoryInfo failed
+[1207/222426.819:ERROR:scoped_process_suspend.cc(40)] NtResumeProcess: An attempt was made to access an exiting process. (0xc000010a)
+[1207/222808.104:ERROR:process_reader_win.cc(151)] SuspendThread: Access is denied. (0x5)
+[1207/222808.104:ERROR:exception_snapshot_win.cc(99)] thread ID 27532 not found in process
+[1207/222808.104:ERROR:scoped_process_suspend.cc(40)] NtResumeProcess: An attempt was made to access an exiting process. (0xc000010a)
+[1207/223306.505:ERROR:directory_reader_win.cc(43)] FindFirstFile: The system cannot find the path specified. (0x3)
+[1207/225858.525:ERROR:process_reader_win.cc(151)] SuspendThread: Access is denied. (0x5)
+[1207/225858.526:ERROR:exception_snapshot_win.cc(99)] thread ID 12008 not found in process
+[1207/225858.526:ERROR:scoped_process_suspend.cc(40)] NtResumeProcess: An attempt was made to access an exiting process. (0xc000010a)
+[1207/230810.411:ERROR:directory_reader_win.cc(43)] FindFirstFile: The system cannot find the path specified. (0x3)
+[1208/010703.253:ERROR:directory_reader_win.cc(43)] FindFirstFile: The system cannot find the path specified. (0x3)
+[1209/083912.233:ERROR:directory_reader_win.cc(43)] FindFirstFile: The system cannot find the path specified. (0x3)

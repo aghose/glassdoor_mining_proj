@@ -30,7 +30,8 @@ def get_jobs(keyword, num_jobs, verbose, sleep_time):
     driver = webdriver.Chrome(ChromeDriverManager().install())
     driver.set_window_size(1120, 1000)
 
-    url = "https://www.glassdoor.com/Job/jobs.htm?suggestCount=0&suggestChosen=false&clickSource=searchBtn&typedKeyword="+keyword+"&locT=&locId=0&jobType=&context=Jobs&sc.keyword="+keyword+"&dropdown=0"    #url = 'https://www.glassdoor.com/Job/jobs.htm?sc.keyword="' + keyword + '"&locT=C&locId=1147401&locKeyword=San%20Francisco,%20CA&jobType=all&fromAge=-1&minSalary=0&includeNoSalaryJobs=true&radius=100&cityId=-1&minRating=0.0&industryId=-1&sgocId=-1&seniorityType=all&companyId=-1&employerSizes=0&applicationType=0&remoteWorkType=0'
+    url = "https://www.glassdoor.com/Job/jobs.htm?suggestCount=0&suggestChosen=false&clickSource=searchBtn&typedKeyword="+keyword+"&locT=&locId=0&jobType=&context=Jobs&sc.keyword="+keyword+"&dropdown=0"    
+   
     driver.get(url)
     jobs = []
 
@@ -69,6 +70,8 @@ def get_jobs(keyword, num_jobs, verbose, sleep_time):
             time.sleep(2)
             collected_successfully = False
             
+            attmps = 0
+            
             while not collected_successfully:
                 try:
                     company_name = driver.find_element_by_xpath('.//div[@class="employerName"]').text
@@ -77,9 +80,24 @@ def get_jobs(keyword, num_jobs, verbose, sleep_time):
                     job_description = driver.find_element_by_xpath('.//div[@class="jobDescriptionContent desc"]').text
                     collected_successfully = True
                 except NoSuchElementException:
-                    job_description = -1
-                except:
-                    time.sleep(5)
+                    if attmps < 4:
+                        print("Number of attempts: " + str(attmps))
+                        time.sleep(5)
+                    else:
+                        job_description = -1
+                        print("Unable to find data")
+                        collected_successfully= True
+                except Exception as e:
+                    print(e)
+                    if attmps < 4:
+                        print("Number of attempts: " + str(attmps))
+                        time.sleep(5)
+                    else:
+                        print("Unable to find data")
+                        job_description = -1
+                        collected_successfully=True
+                finally:
+                    attmps+=1
 
             try:
                 salary_estimate = driver.find_element_by_xpath('.//div[@class="salary"]').text
