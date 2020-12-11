@@ -6,6 +6,8 @@ Created on Wed Sep 30 16:27:22 2020
 """
 
 import pandas as pd
+from sklearn.preprocessing import LabelEncoder
+import random
 #import numpy as np
 
 #data = pd.read_csv('uncleaned_data.csv')
@@ -37,8 +39,16 @@ import pandas as pd
             # of "Data Scientist"
         #Parsing for seniority:
             #Parse the titles for keywords to indicate seniority level of the position
+    #Convert catagorical/object data to numeric
+        #First convert all object data to catagorical
+    #Drop rows where Ratings = -1
     
-def clean_data(data_file_path, current_year):
+def clean_data(data_file_path='uncleaned_data.csv', current_year=2020):
+    #Setting console display options
+    pd.set_option('display.max_rows', None)
+    pd.set_option('display.max_columns', None)
+    pd.set_option('display.width', None)
+    pd.set_option('display.max_colwidth', None)
     
     data = pd.read_csv(data_file_path)
     
@@ -92,7 +102,7 @@ def clean_data(data_file_path, current_year):
         lambda x: ' CA' if 'los angeles' in x.lower() else x)    
     
     'Company age'
-    #current_year = 2020
+    current_year = 2020
     df['age'] = df.Founded.apply(lambda x: x if x <0 else current_year-x)
     
     'Parse Job descrpition'
@@ -132,13 +142,51 @@ def clean_data(data_file_path, current_year):
              'Rating','Company Name', 'Location', 'location_state', 'Size', 'Founded',
              'age', 'Type of ownership', 'Industry', 'Sector', 'Revenue']]
     
+    
+    'Converting catagorical/object data to numeric'
+    
+    #First I have to convert all the objects to catagorical data
+    df = df.apply(lambda x: x.astype('category') if x.dtype=='object' else x)
+    
+    #Convert revenue to numeric, in order
+    df['revenue_num'] = df.Revenue.apply(convert_revenue_no_unknown).astype('int64')
+    df['revenue_num_unknown']= df.Revenue.apply(convert_revenue).astype('int64')
+    
+    #Convert size to numeric, in order
+    df['size_num'] = df.Size.apply(convert_size_no_unknown).astype('int64')
+    df['size_num_unknown']= df.Size.apply(convert_size).astype('int64')
+    
+    #Convert all desired catagorical data to numeric
+    # creating instance of labelencoder
+    labelencoder = LabelEncoder()
+    # Assigning numerical values and storing in another column
+    column_names = ["simplified_title",'seniority','location_state',
+                    'Type of ownership', 'Sector']
+    column_names_num = ["simplified_title_num",'seniority_num',
+                        'location_state_num','type_of_ownership_num',
+                        'sector_num']
+    # Assigning numerical values and storing in another column
+    for i in range(len(column_names)):
+        df[column_names_num[i]] = labelencoder.fit_transform(df[column_names[i]])
+    
+    df
+
+    # generate binary values using get_dummies
+    dum_df = pd.get_dummies(df, columns=["simplified_title", 
+                                         'seniority','location_state',
+                                         'Type of ownership', 'Sector'])
+    # merge with main df on key values
+    df_merge = df.merge(dum_df, how='left')
+    
+    #Drop rows where Rating==-1
+    #df= df[df['Rating'] != -1]
+    
+
+    
     final_df = df
     df_missing_salary.to_csv('missing_salary.csv', index = False)
     return final_df
 
-def convert_hourly(df):
-    
-    return df
 
 def simplify_job_title(title):
     if all(x in title.lower() for x in ['data', 'scientist']):
@@ -174,4 +222,99 @@ def find_seniority(title):
         return 'Junior'
     else:
         return 'na'
+    
+def convert_revenue(revenue):
+    if revenue=='Unknown / Non-Applicable':
+        return 0
+    elif revenue=='Less than $1 million (USD)':
+        return 1
+    elif revenue=='$1 to $5 million (USD)':
+        return 2
+    elif revenue=='$5 to $10 million (USD)':
+        return 3
+    elif revenue=='$10 to $25 million (USD)':
+        return 4
+    elif revenue=='$25 to $50 million (USD)':
+        return 5
+    elif revenue=='$50 to $100 million (USD)':
+        return 6
+    elif revenue=='$100 to $500 million (USD)':
+        return 7
+    elif revenue=='$500 million to $1 billion (USD)':
+        return 8
+    elif revenue=='$1 to $2 billion (USD)':
+        return 9
+    elif revenue=='$2 to $5 billion (USD)':
+        return 10
+    elif revenue=='$5 to $10 billion (USD)':
+        return 11
+    elif revenue=='$10+ billion (USD)':
+        return 12
+    else: return 0
+    
+def convert_revenue_no_unknown(revenue):
+    if revenue=='Unknown / Non-Applicable':
+        return random.randint(1,12)
+    elif revenue=='Less than $1 million (USD)':
+        return 1
+    elif revenue=='$1 to $5 million (USD)':
+        return 2
+    elif revenue=='$5 to $10 million (USD)':
+        return 3
+    elif revenue=='$10 to $25 million (USD)':
+        return 4
+    elif revenue=='$25 to $50 million (USD)':
+        return 5
+    elif revenue=='$50 to $100 million (USD)':
+        return 6
+    elif revenue=='$100 to $500 million (USD)':
+        return 7
+    elif revenue=='$500 million to $1 billion (USD)':
+        return 8
+    elif revenue=='$1 to $2 billion (USD)':
+        return 9
+    elif revenue=='$2 to $5 billion (USD)':
+        return 10
+    elif revenue=='$5 to $10 billion (USD)':
+        return 11
+    elif revenue=='$10+ billion (USD)':
+        return 12
+    else: return 0
 
+def convert_size(size):
+    if size=='Unknown':
+        return 0
+    elif size=='1 to 50 Employees':
+        return 1
+    elif size=='51 to 200 Employees':
+        return 2
+    elif size=='201 to 500 Employees':
+        return 3
+    elif size=='501 to 1000 Employees':
+        return 4
+    elif size=='1001 to 5000 Employees':
+        return 5
+    elif size=='5001 to 10000 Employees':
+        return 6
+    elif size=='10000+ Employees':
+        return 7
+    else: return 0
+    
+def convert_size_no_unknown(size):
+    if size=='Unknown':
+        return random.randint(1,7)
+    elif size=='1 to 50 Employees':
+        return 1
+    elif size=='51 to 200 Employees':
+        return 2
+    elif size=='201 to 500 Employees':
+        return 3
+    elif size=='501 to 1000 Employees':
+        return 4
+    elif size=='1001 to 5000 Employees':
+        return 5
+    elif size=='5001 to 10000 Employees':
+        return 6
+    elif size=='10000+ Employees':
+        return 7
+    else: return 0
