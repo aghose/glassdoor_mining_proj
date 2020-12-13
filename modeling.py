@@ -2,7 +2,7 @@
 """
 Created on Fri Dec 11 08:33:48 2020
 
-@author: asgho
+@author: Akash Ghose
 """
 
 import pandas as pd
@@ -125,12 +125,14 @@ plt.show()
 kmeans_3 = KMeans(n_clusters=3, init='k-means++', random_state=0)
 pred_y_3 = kmeans_3.fit_predict(kmeans_df)
 
-kmeans_clusters_df_3 = pd.DataFrame(kmeans.cluster_centers_)
+kmeans_clusters_df_3 = pd.DataFrame(kmeans_3.cluster_centers_)
 kmeans_clusters_df_3.columns = df_merge.columns
+
+pandas.tools.plotting.parallel_coordinates(kmeans_df, 'cluster')
 
 #K=4
 kmeans_4 = KMeans(n_clusters=4, init='k-means++', max_iter=300, random_state=0)
-pred_y_4 = kmeans.fit_predict(kmeans_df)
+pred_y_4 = kmeans_4.fit_predict(kmeans_df)
 
-kmeans_clusters_df_4 = pd.DataFrame(kmeans.cluster_centers_)
+kmeans_clusters_df_4 = pd.DataFrame(kmeans_4.cluster_centers_)
 kmeans_clusters_df_4.columns = df_merge.columns
