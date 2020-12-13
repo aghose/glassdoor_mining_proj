@@ -179,7 +179,7 @@ def clean_data(data_file_path='uncleaned_data.csv', current_year=2020):
     df_merge = df.merge(dum_df, how='left')
     
     #Drop rows where Rating==-1
-    #df= df[df['Rating'] != -1]
+    df= df[df['Rating'] != -1]
     
 
     
