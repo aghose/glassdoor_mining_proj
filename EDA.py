@@ -92,15 +92,22 @@ table_00 = (pd.pivot_table(data, index=['simplified_title'],
             sort_values(by='avg_salary', ascending=False))
 
 table_00
+sns.set()
+ax = table_00.plot.bar()
 
 # [title and seniority] vs salary
 table_01 = (pd.pivot_table(data, index=['simplified_title', 'seniority'], 
-                        values= ['avg_salary']))
+                        values= ['avg_salary']).
+            sort_values(by=['seniority','avg_salary'], ascending=False))
 table_01
+
+ax = table_01.plot.bar()
 
 # [title and revenue] vs salary
 table_02 = (pd.pivot_table(data, values='avg_salary', 
-                           index=['simplified_title', 'Revenue']))
+                           index=['simplified_title', 'Revenue']).
+            sort_values(by=['Revenue','simplified_title'], ascending=False))
+ax = table_01.plot.bar()
 
 # Plot revnue on one axis and salary on the other
 sns.set_theme(style="whitegrid")

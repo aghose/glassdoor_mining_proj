@@ -25,7 +25,21 @@ opts_knit$set(width=75)
 ```
 ## Technologies used:
 
-Python, pandas, numpy, seaborn, matplotlib, streamlit, Rmarkdown and KnitR
+Python, pandas, numpy, seaborn, matplotlib, streamlit, Rmarkdown, KnitR and Heroku
+
+## How to use my project:
+
+You may access my final product here: <https://glassdoor-mining-proj.herokuapp.com/>
+
+If you wish to run my files, the entire project can be found here: <https://github.com/aghose/glassdoor_mining_proj>
+
+From my github page, you may download all the files. If you wish to run my scraper, run the run_scraper.py file
+If you wish to run my data cleaner, run my run_cleaner.py file
+If you wish to see the entirety of my EDA, run EDA.py
+My models are made and stored in modeling.py
+If you wish to run my data app locally, from your terminal, run the command "streamlit run myapp.py"
+  * You need to in the project directory in the terminal
+  * You need to have streamlit installed
 
 ## Phase 01: Project Planning
 
@@ -118,6 +132,8 @@ In class, we had only learnt about 4 algorithms: Linear Regression, Logistic reg
 Now that I had my models, it was time to build my data product! I decided I wanted my data product to be a web app, and I built it using streamlit.
 
 ## Phase 07: Documenting & Deploying
+
+I am documenting this project using Rmd. I have deployed it via Heroku.
 
 ## Resources:
 
