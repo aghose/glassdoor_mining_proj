@@ -33,7 +33,40 @@ st.sidebar.title("Operations on the Dataset")
 #st.subheader("Checkbox")
 show_data = st.sidebar.checkbox("Show Raw Data", False)
 
-
+def main():
+    choose_model = st.sidebar.selectbox("Choose the ML Model",
+    		["SKLearns LM"])
+    
+    #Bring in the data
+    data = read_data()
+    
+    if show_data:
+        st.subheader("Showing raw data ---->>>")
+        st.write(data)
+    
+    x_train, x_test, y_train, y_test = preprocessing(data)
+    
+    template = make_template(x_train, data)
+    
+    if(choose_model == "SKLearns LM"):
+        accuracy, lm = sklearns_lm(x_train, x_test, y_train, y_test)
+        st.text('Accuracy of the model is: ')
+        st.write(accuracy, '%')
+        try:
+            if(st.checkbox('Predict with own data')):
+                user_data = input_user_data(template)
+                if(st.sidebar.checkbox("Show User Input")):
+                    st.write(user_data)
+                if st.button("Predict"):
+                    prediction = int(lm.predict(user_data) *1000)
+                    prediction = locale.format("%d", prediction, grouping=True)
+                    st.write("You should get paid around: $", prediction, "per year")
+                
+                return
+        except Exception as err:
+            st.write(err)
+            pass
+        
 @st.cache
 def read_data():
     data = pd.read_csv('cleaned_data.csv')
@@ -269,38 +302,5 @@ def make_template(x_train, data):
     template = fix_template(template, data)
     return template
 
-def main():
-    choose_model = st.sidebar.selectbox("Choose the ML Model",
-    		["SKLearns LM"])
-    
-    #Bring in the data
-    data = read_data()
-    
-    if show_data:
-        st.subheader("Showing raw data ---->>>")
-        st.write(data)
-    
-    x_train, x_test, y_train, y_test = preprocessing(data)
-    
-    template = make_template(x_train, data)
-    
-    if(choose_model == "SKLearns LM"):
-        accuracy, lm = sklearns_lm(x_train, x_test, y_train, y_test)
-        st.text('Accuracy of the model is: ')
-        st.write(accuracy, '%')
-        try:
-            if(st.checkbox('Predict with own data')):
-                user_data = input_user_data(template)
-                if(st.sidebar.checkbox("Show User Input")):
-                    st.write(user_data)
-                if st.button("Predict"):
-                    prediction = int(lm.predict(user_data) *1000)
-                    prediction = locale.format("%d", prediction, grouping=True)
-                    st.write("You should get paid around: $", prediction, "per year")
-                
-                return
-        except Exception as err:
-            st.write(err)
-            pass
-        
+
 main()

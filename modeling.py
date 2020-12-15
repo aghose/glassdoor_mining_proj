@@ -134,8 +134,3 @@ pred_y_4 = kmeans_4.fit_predict(kmeans_df)
 
 kmeans_clusters_df_4 = pd.DataFrame(kmeans_4.cluster_centers_)
 kmeans_clusters_df_4.columns = df_merge.columns
-
-sample_dum = pd.get_dummies(sample[columns], columns=["simplified_title", 'seniority',
-                                         'location_state','Type of ownership',
-                                         'Sector'])
-sample = pd.DataFrame(sample)
