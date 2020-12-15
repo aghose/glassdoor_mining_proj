@@ -158,7 +158,7 @@ template = make_template(x_train, data)
 
 if show_summary:
     st.markdown("""
-    ## Summary:
+    ## **Summary**:
     
     I have collected data from 2000 Glassdoor job posting regarding Data Scientists. I have cleaned, processed and analyzed that data, and afterwards, I applied machine learning algorithms on that data to build a data product that can estimate a salary, given certain variables. The app is at the bottom of the page
     
