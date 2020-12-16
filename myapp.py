@@ -160,7 +160,7 @@ if show_summary:
     st.markdown("""
     ## **Summary**:
     
-    I have collected data from 2000 Glassdoor job posting regarding Data Scientists. I have cleaned, processed and analyzed that data, and afterwards, I applied machine learning algorithms on that data to build a data product that can estimate a salary, given certain variables. The app is at the bottom of the page
+    I have collected data from 2000 [Glassdoor](https://www.glassdoor.com/Job/jobs.htm?suggestCount=0&suggestChosen=false&clickSource=searchBtn&typedKeyword=Data_Scientist&locT=&locId=0&jobType=&context=Jobs&sc.keyword=Data_Scientist&dropdown=0) job posting regarding Data Scientists. I have cleaned, processed and analyzed that data, and afterwards, I applied machine learning algorithms on that data to build a data product that can estimate a salary, given certain variables. The app is at the bottom of the page
     
     
                 """)
@@ -646,6 +646,7 @@ def lasso_regression(x_train, x_test, y_train, y_test):
 
 def use_model(model):
     accuracy, model = model(x_train, x_test, y_train, y_test)
+    st.write("The current model being used is: ", model)
     st.text('Accuracy of the model is: ')
     st.write(accuracy, '%')
     try:
