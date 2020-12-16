@@ -112,7 +112,8 @@ ax = table_01.plot.bar()
 #State vs Salary
 state_salary = (pd.pivot_table(data, index='location_state', values='avg_salary').
                 sort_values(by='avg_salary', ascending=False))
-state_salary.plot.bar()
+plt.figure(figsize=(50,20))
+state_salary.plot.barh()
 
 listings_state = data.location_state.value_counts()
 listings_state.plot.bar()
