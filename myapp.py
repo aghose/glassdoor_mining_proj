@@ -451,6 +451,8 @@ def main():
         st.subheader("Showing raw data ---->>>")
         st.write(data)
     
+    st.write("The current model being used is: ", choose_model)
+    
     if(choose_model == "SKLearns Linear Regression"):
         use_model(sklearns_lm)
         
@@ -646,7 +648,6 @@ def lasso_regression(x_train, x_test, y_train, y_test):
 
 def use_model(model):
     accuracy, model = model(x_train, x_test, y_train, y_test)
-    st.write("The current model being used is: ", model)
     st.text('Accuracy of the model is: ')
     st.write(accuracy, '%')
     try:
