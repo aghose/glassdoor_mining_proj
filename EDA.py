@@ -109,6 +109,14 @@ table_02 = (pd.pivot_table(data, values='avg_salary',
             sort_values(by=['Revenue','simplified_title'], ascending=False))
 ax = table_01.plot.bar()
 
+#State vs Salary
+state_salary = (pd.pivot_table(data, index='location_state', values='avg_salary').
+                sort_values(by='avg_salary', ascending=False))
+state_salary.plot.bar()
+
+listings_state = data.location_state.value_counts()
+listings_state.plot.bar()
+
 # Plot revnue on one axis and salary on the other
 sns.set_theme(style="whitegrid")
 # ax = sns.violinplot(x="Revenue", y="avg_salary", data=data,

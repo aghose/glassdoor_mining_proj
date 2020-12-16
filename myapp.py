@@ -136,6 +136,19 @@ def eda():
     plot01 = table_01.plot.bar()
     fig01 = plot01.get_figure()
     st.pyplot(fig01)
+    
+    st.subheader('State vs Salary')
+    state_salary = (pd.pivot_table(data, index='location_state', values='avg_salary').
+                    sort_values(by='avg_salary', ascending=True))
+    plot_st_sl = state_salary.plot.barh()
+    fig_st_sl = plot_st_sl.get_figure()
+    st.pyplot(fig_st_sl)
+    
+    st.subheader('States vs Job listings')
+    listings_state = data.location_state.value_counts().sort_values(ascending=True)
+    plot_st_listings = listings_state.plot.barh()
+    fig_st_listings = plot_st_listings.get_figure()
+    st.pyplot(fig_st_listings)
 
     st.subheader('Data Correlations')
     data_corr = data.corr()
