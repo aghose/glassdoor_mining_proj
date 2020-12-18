@@ -144,7 +144,7 @@ def eda():
                     sort_values(by='avg_salary', ascending=True))
     plot_st_sl = state_salary.plot.barh()
     fig_st_sl = plot_st_sl.get_figure()
-    st.pyplot(fig_st_sl)
+    st.pyplot(fig_st_sl,width=100,height=1000)
     fig_st_sl.clear()
     
     st.subheader('States vs Job listings')
@@ -188,7 +188,7 @@ if show_report:
                 
     ## Technologies used:
     
-    Python, pandas, numpy, seaborn, matplotlib, streamlit, Rmarkdown, KnitR and Heroku
+    Python, pandas, numpy, seaborn, selenium, matplotlib, streamlit, Rmarkdown, KnitR and Heroku
     
     ## How to use my project:
     

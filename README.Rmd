@@ -23,9 +23,15 @@ opts_chunk$set(echo=FALSE,
                warning=FALSE)
 opts_knit$set(width=75)
 ```
+
+## **Summary**:
+    
+I have collected data from 2000 [Glassdoor](https://www.glassdoor.com/Job/jobs.htm?suggestCount=0&suggestChosen=false&clickSource=searchBtn&typedKeyword=Data_Scientist&locT=&locId=0&jobType=&context=Jobs&sc.keyword=Data_Scientist&dropdown=0) job posting regarding Data Scientists. I have cleaned, processed and analyzed that data, and afterwards, I applied machine learning algorithms on that data to build a data product that can estimate a salary, given certain variables. The app is at the bottom of the page
+    
+
 ## Technologies used:
 
-Python, pandas, numpy, seaborn, matplotlib, streamlit, Rmarkdown, KnitR and Heroku
+Python, pandas, numpy, seaborn, selenium, matplotlib, streamlit, Rmarkdown, KnitR and Heroku
 
 ## How to use my project:
 
